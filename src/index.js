@@ -1,16 +1,16 @@
-const express = require('express')
-const app = express()
-const connectDb = require("../config/db.js")
-const userRouter = require("../routes/index.js")
+// const express = require('express')
+import express from 'express';
+const app =   express();
+import { connectDb } from '../config/db.js';
+import userRouter from '../routes/userRouter.js';
+import cookieParser from 'cookie-parser';
 
 
-const port = 3000
+app.use(cookieParser());
 app.use(express.json());
-
-
-
 app.use("/api/v1", userRouter);
 
+const port = 3000;
 connectDb();
 
 app.get('/', (req, res) => {

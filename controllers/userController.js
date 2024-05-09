@@ -1,8 +1,8 @@
-const bcrypt = require("bcrypt");
-const generateToken = require("../utils/generateToken");
-const User = require("../models/userModel");
+import bcrypt from "bcrypt";
+import {generateToken} from "../utils/generateToken.js"
+import User from "../models/userModel.js";
 
-const signup = async ( req, res) => {
+export const signup = async ( req, res) => {
 
     console.log("Hitted");
     try {
@@ -27,6 +27,7 @@ const signup = async ( req, res) => {
         });
     
         console.log(newUser);
+
         const newUserCreated = await newUser.save();
 
         console.log(newUserCreated);
@@ -38,17 +39,22 @@ const signup = async ( req, res) => {
         const token = generateToken(email);
         res.send(token);
 
+        res.cookie("token", token)
+        res.send("Signed Successfully");
+
         
     } catch (error) {
-        console.log(error);
-        return res.send(error);
+        console.log(error, "Somthing wrong");
+        res.status(500).send("Internal Server Error");
     }
 }; 
 
+// signin started
 
-const signin = async () => {
+export const signin = async () => {
     try {
         const { password, email} = req.body;
+
         const user = await User.findOne({ email});
 
         console.log(user);
@@ -62,17 +68,17 @@ const signin = async () => {
         if (!matchPassword) {
             return res.send("password incorrect");
         }
+        
 
         const token = generateToken(email);
-        res.send(token);
+        res.cookie("token", token);
+        res.send("Logged in!");
+        
     } catch (error) {
-        console.log(error);
+        console.log(error, "Somthing wrong");
+        res.status(500).send("Internal Server Error");
     }
     
 
-}
+};
 
-module.exports = {
-    signin,
-    signup
-}
