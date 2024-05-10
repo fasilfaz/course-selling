@@ -37,7 +37,7 @@ export const signup = async ( req, res) => {
         }
 
         const token = generateToken(email);
-        res.send(token);
+        // res.send(token);
 
         res.cookie("token", token)
         res.send("Signed Successfully");
@@ -51,9 +51,9 @@ export const signup = async ( req, res) => {
 
 // signin started
 
-export const signin = async () => {
+export const signin = async (req, res) => {
     try {
-        const { password, email} = req.body;
+        const { email, password} = req.body;
 
         const user = await User.findOne({ email});
 

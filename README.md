@@ -23,3 +23,10 @@ In the second commint i used some **npm packeges**
   - cookie-parser.
   - multer.
   
+
+
+## Third commit
+
+In the third commit i created **instructorController, admin-middleware, instructor-middleware, user-middleware, instructorRouter** and also user and instructor **authentication**.
+
+
