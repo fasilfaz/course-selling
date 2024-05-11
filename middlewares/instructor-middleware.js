@@ -12,7 +12,7 @@ function authenticateInstructor(req, res, next) {
     if (err) return res.send("Token not valid or missing").Status(403);
 
     req.user = user;
-    console.log(req.user.role);
+    console.log(req.user.role)
     if (req.user.role !== "instructor" && req.user.role !== "admin") {
       return res.send("not authenticated");
     }

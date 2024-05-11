@@ -9,7 +9,5 @@ export const generateToken = (email) => {
 };
 
 export const adminToken = (user) => {
-    return jsonwebToken.sign({ data: user.id, role: user.role }, secretKey, {
-      expiresIn: "1d",
-    });
+    return jsonwebToken.sign({ data: user.id, role: user.role }, secretKey, { expiresIn: "1d" });
 };
