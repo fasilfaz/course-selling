@@ -41,7 +41,7 @@ export const createCourse = async (req, res) => {
   
         const { title, description, price, instructorEmail } = body;
   
-        const findInstructor = await Instructor.find({ email: instructorEmail });
+        const findInstructor = await Instructor.findOne({ email: instructorEmail });
   
         if (!findInstructor) {
           return res.send("please add instructor first").status(201);

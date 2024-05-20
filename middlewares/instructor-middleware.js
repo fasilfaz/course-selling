@@ -8,12 +8,14 @@ function authenticateInstructor(req, res, next) {
 
   jsonwebToken.verify(token, process.env.SE, (err, user) => {
     console.log(err);
+   console.log(token);
+    if (err) {
+      return res.send("Token not valid or missing").status(403)
+    };
 
-    if (err) return res.send("Token not valid or missing").Status(403);
-
-    req.user = user;
-    console.log(req.user.role)
-    if (req.user.role !== "instructor" && req.user.role !== "admin") {
+    req.instructor = user;
+    console.log(req.instructorr.role)
+    if (req.instructor.role !== "instructor" && req.instructor.role !== "admin") {
       return res.send("not authenticated");
     }
     next();
